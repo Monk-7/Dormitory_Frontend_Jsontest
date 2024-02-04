@@ -32,6 +32,12 @@ import { getUserId } from "../services/userService";
 
 import jsonData from "../jsonTest/Building.json";
 import AddBuilding from "./Popup/AddBuilding";
+import {
+  CheckBadgeIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/solid";
 
 const tabsData = [
   {
@@ -207,6 +213,18 @@ export default function Building() {
                           data.roomAll.map((data) => (
                             <button>
                               <Card className="flex m-1 h-14 rounded-md justify-center items-center border min-w-[85px]">
+                                <CheckCircleIcon
+                                  color="green"
+                                  className="absolute top-[-5px] right-[-5px] w-4 h-4"
+                                />
+                                {/* <ClockIcon
+                                  color="#ECB92F"
+                                  className="absolute top-[-5px] right-[-5px] w-4 h-4"
+                                /> */}
+                                {/* <ExclamationCircleIcon
+                                  color="#AE2012"
+                                  className="absolute top-[-5px] right-[-5px] w-4 h-4"
+                                /> */}
                                 <span>{data.roomName}</span>
                               </Card>
                             </button>
