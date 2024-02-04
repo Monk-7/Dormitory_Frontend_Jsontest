@@ -1,18 +1,30 @@
 import Imgslide from "../components/Imgslide";
 import AddBuilding from "../components/Popup/AddBuilding";
 import Building from "../components/Building";
-import { FunnelIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {
+  FunnelIcon,
+  Cog6ToothIcon,
+  BuildingOffice2Icon,
+} from "@heroicons/react/24/outline";
+import { Option, Select, Typography } from "@material-tailwind/react";
 
 export default function Home() {
   return (
-    <div className="mx-5 md:mx-10 mt-5 mb-10">
+    <div className="mx-5 md:mx-10 mt-5 mb-10 min-w-[500px]">
       {/* <Imgslide /> */}
       <div className="flex my-4 items-center justify-between">
-        <p className="font-bold">All Building</p>
-        <div className="flex justify-center items-center text-xl">
-          <AddBuilding />
-          <PencilSquareIcon width={25} className="ml-6" />
-          <FunnelIcon width={24} className="ml-6" />
+        <Typography variant="h5">Management</Typography>
+        <div className="flex w-70 gap-2">
+          <Select label="Select Domitory">
+            <Option>Domitory A</Option>
+            <Option>Domitory B</Option>
+            <Option>Domitory C</Option>
+          </Select>
+          <Select label="Select Building" disabled>
+            <Option>Building A</Option>
+            <Option>Building B</Option>
+            <Option>Building C</Option>
+          </Select>
         </div>
       </div>
       <Building />

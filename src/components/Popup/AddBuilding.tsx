@@ -7,32 +7,32 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { useToggle,  } from "../../hooks/useToggle";
-import React, { useState, useEffect } from 'react';
+import { useToggle } from "../../hooks/useToggle";
+import React, { useState, useEffect } from "react";
 
-import apiClient from '../../services/apiClient';
-import { getUserId } from '../../services/userService';
+import apiClient from "../../services/apiClient";
+import { getUserId } from "../../services/userService";
 
 interface buildingInterface {
-  idUser:string,
-  buildingName: string,
-  buildingRoomNumberlength: number,
-  buildingFloor: number,
-  buildingRoom: number,
-  waterPrice: number,
-  electricalPrice: number,
-  roomPrice: number,
-  furniturePrice: number,
-  internetPrice: number,
-  parkingPrice: number
+  idUser: string;
+  buildingName: string;
+  buildingRoomNumberlength: number;
+  buildingFloor: number;
+  buildingRoom: number;
+  waterPrice: number;
+  electricalPrice: number;
+  roomPrice: number;
+  furniturePrice: number;
+  internetPrice: number;
+  parkingPrice: number;
 }
 
 export default function AddBuilding() {
   const { status: isOpen, toggleStatus: setIsOpen } = useToggle();
 
   const [form, setForm] = useState<buildingInterface>({
-    idUser:'',
-    buildingName: '',
+    idUser: "",
+    buildingName: "",
     buildingRoomNumberlength: 3,
     buildingFloor: 0,
     buildingRoom: 0,
@@ -41,46 +41,46 @@ export default function AddBuilding() {
     roomPrice: 0,
     furniturePrice: 0,
     internetPrice: 0,
-    parkingPrice: 0
+    parkingPrice: 0,
   });
 
-  const changeBuildingHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeBuildingHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setForm({ ...form, [event.currentTarget.name]: event.currentTarget.value });
   };
 
   const sendDataAddBuilding = async () => {
-    const isFormFilled = Object.values(form).every(value => value !== '');
-    const token = localStorage.getItem('token');
-    if(isFormFilled && token !== '')
-    {
+    const isFormFilled = Object.values(form).every((value) => value !== "");
+    const token = localStorage.getItem("token");
+    if (isFormFilled && token !== "") {
       console.log(form);
       try {
-        const res = await apiClient('https://localhost:7282/Api/Building/CreateBuilding', {
-          method: 'POST',
-          data: form,
-        });
+        const res = await apiClient(
+          "https://localhost:7282/Api/Building/CreateBuilding",
+          {
+            method: "POST",
+            data: form,
+          }
+        );
         console.log(res);
         window.location.reload();
-      }
-      catch (error)
-      {
+      } catch (error) {
         console.log(error);
       }
-    }
-    else
-    {
+    } else {
       alert("กรุณากรอกข้อมูลให้ครบ");
     }
-  }
+  };
 
-  useEffect(() => {
-    const idUser = getUserId();
-    if(idUser != '')
-    {
-      setForm(prevForm => ({ ...prevForm, idUser}));
-    }
-    
-  }, []);
+  // useEffect(() => {
+  //   const idUser = getUserId();
+  //   if(idUser != '')
+  //   {
+  //     setForm(prevForm => ({ ...prevForm, idUser}));
+  //   }
+
+  // }, []);
 
   return (
     <div>
@@ -89,62 +89,57 @@ export default function AddBuilding() {
         onClick={setIsOpen}
         className="cursor-pointer"
       />
-      <Dialog open={isOpen} handler={setIsOpen} className="p-4">
-        <DialogHeader>Create new building</DialogHeader>
-        <DialogBody>
+      <Dialog size="sm" open={isOpen} handler={setIsOpen} className="p-4 ">
+        <DialogHeader className="p-2">Create new building</DialogHeader>
+        <DialogBody className="p-2">
           <p>You need to enter the code for create your dormitory.</p>
-          <div className="my-6 flex items-center">
-            <p className="w-[200px] text-black">Building name</p>
+          <div className="my-6 flex items-center gap-5">
+            <p className="w-[200px] text-black text-right">Building name</p>
             <Input
               onChange={changeBuildingHandler}
-              name= "buildingName"
+              name="buildingName"
               label="Building name"
-              containerProps={{ className: "max-w-[400px]" }}
             />
           </div>
-          <div className="my-6 flex items-center">
-            <p className="w-[200px] text-black">Storied building</p>
+          <div className="my-6 flex items-center gap-5">
+            <p className="w-[200px] text-black text-right">Storied building</p>
             <Input
               onChange={changeBuildingHandler}
-              name= "buildingFloor"
+              name="buildingFloor"
               label="Storied building"
-              containerProps={{ className: "max-w-[400px]" }}
             />
           </div>
-          <div className="my-6 flex items-center">
-            <p className="w-[200px] text-black">Number of rooms</p>
+          <div className="my-6 flex items-center gap-5">
+            <p className="w-[200px] text-black text-right">Number of rooms</p>
             <Input
               onChange={changeBuildingHandler}
-              name= "buildingRoom"
+              name="buildingRoom"
               label="Number of rooms"
-              containerProps={{ className: "max-w-[400px]" }}
             />
           </div>
         </DialogBody>
-        <DialogHeader>Room details</DialogHeader>
-        <DialogBody className="py-0 ">
+        <DialogHeader className="p-2">Room details</DialogHeader>
+        <DialogBody className="p-2">
           <p>Set room default for the fist time. You can be edited later.</p>
 
-          <div className="my-6 flex items-center">
-            <p className="w-[200px] text-black">Room fee</p>
+          <div className="my-6 flex items-center gap-5">
+            <p className="w-[200px] text-black text-right">Room fee</p>
             <Input
               onChange={changeBuildingHandler}
-              name= "roomPrice"
+              name="roomPrice"
               label="Room fee"
-              containerProps={{ className: "max-w-[400px]" }}
             />
           </div>
-          <div className="my-6 flex items-center">
-            <p className="w-[200px] text-black">Furniture fee</p>
+          <div className="my-6 flex items-center gap-5">
+            <p className="w-[200px] text-black text-right">Furniture fee</p>
             <Input
               onChange={changeBuildingHandler}
-              name= "furniturePrice"
+              name="furniturePrice"
               label="Furniture fee"
-              containerProps={{ className: "max-w-[400px]" }}
             />
           </div>
         </DialogBody>
-        <DialogFooter>
+        <DialogFooter className="p-2">
           <Button variant="filled" className="bg-black" onClick={setIsOpen}>
             <span onClick={sendDataAddBuilding}>Continue</span>
           </Button>

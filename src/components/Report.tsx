@@ -34,7 +34,7 @@ export default function Report() {
         <div className="flex w-full px-5">
           <div className="flex flex-col justify-center">
             <Typography variant="h6">Internet</Typography>
-            <Typography>internet not working</Typography>
+            <Typography variant="small">internet not working</Typography>
           </div>
         </div>
       </div>
