@@ -92,10 +92,24 @@ export default function Invoice() {
   ];
 
   return (
-    <div className="mx-5 md:mx-10 mt-5 mb-10">
-      <Typography variant="h5">Invoice</Typography>
+    <div className="mx-5 md:mx-10 mt-5 mb-10 min-w-[500px]">
       <div className="flex justify-between items-center">
-        <div className="w-80 mt-5 border-l-[3px] px-5 py-2 border-black font-bold">
+        <Typography variant="h5">Invoice</Typography>
+        <div className="flex w-70 gap-2">
+          <Select label="Select Domitory">
+            <Option>Domitory A</Option>
+            <Option>Domitory B</Option>
+            <Option>Domitory C</Option>
+          </Select>
+          <Select label="Select Building" disabled>
+            <Option>Building A</Option>
+            <Option>Building B</Option>
+            <Option>Building C</Option>
+          </Select>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-5">
+        <div className="w-80 border-l-[3px] px-5 py-2 border-black font-bold">
           All Building
         </div>
         <Popover placement="bottom-end">

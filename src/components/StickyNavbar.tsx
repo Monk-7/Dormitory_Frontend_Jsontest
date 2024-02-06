@@ -1,5 +1,5 @@
 import { useToggle } from "../hooks/useToggle";
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Menu,
   MenuHandler,
@@ -20,14 +20,14 @@ import {
   InboxArrowDownIcon,
   LifebuoyIcon,
   PowerIcon,
-  PlusCircleIcon,
   BellIcon,
 } from "@heroicons/react/24/outline";
 
 import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
-import { checkLogin, login, registerFunc } from '../services/authService';
-import apiClient from '../services/apiClient';
-import { getCurrentUser } from '../services/userService';
+import { checkLogin, login, registerFunc } from "../services/authService";
+import apiClient from "../services/apiClient";
+import { getCurrentUser } from "../services/userService";
+import AddDorm from "./Popup/AddDorm";
 
 const profileMenuItems = [
   {
@@ -54,15 +54,17 @@ const profileMenuItems = [
 
 const Links = [
   { name: "Management", path: "/" },
+  { name: "Meter", path: "/meter" },
+  { name: "Invoice", path: "/invoice" },
   { name: "Community", path: "/community" },
-  { name: "Turnover", path: "/turnover" },
+  { name: "Dashboard", path: "/dashboard" },
 ];
 
 interface userInterface {
-  userID: string,
-  firstname: string,
-  lastname: string,
-  role: string,
+  userID: string;
+  firstname: string;
+  lastname: string;
+  role: string;
 }
 
 export function StickyNavbar() {
@@ -76,9 +78,9 @@ export function StickyNavbar() {
       setIsAuth(true);
       const data = getCurrentUser();
       setUserData(data);
-    } 
+    }
   };
-  
+
   // const getUserData = async () =>
   // {
   //   const data = await getCurrentUser();
@@ -94,16 +96,17 @@ export function StickyNavbar() {
 
   function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-    const menuAction = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+
+    const menuAction = (
+      event: React.MouseEvent<HTMLInputElement, MouseEvent>
+    ) => {
       setIsMenuOpen(false);
-      if(event.currentTarget.name === "Sign Out")
-      {
-        localStorage.setItem('token', '');
+      if (event.currentTarget.name === "Sign Out") {
+        localStorage.setItem("token", "");
         window.location.reload();
       }
     };
-  
+
     return (
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
         <MenuHandler>
@@ -163,13 +166,12 @@ export function StickyNavbar() {
     );
   }
 
-
   const navList = (
-    <ul className="my-4 flex flex-col gap-5 md:my-0 md:flex-row md:items-center">
+    <ul className="my-4 flex flex-col gap-5 lg:my-0 lg:flex-row lg:items-center">
       {isAuth ? (
         Links.map((li) => (
-          <Typography as="li" color="black" className="px-0 md:px-5 font-bold">
-            <a href="#" className="flex items-center">
+          <Typography as="li" color="black" className="px-0 lg:px-5 font-bold">
+            <a href={li.path} className="flex items-center">
               {li.name}
             </a>
           </Typography>
@@ -181,7 +183,7 @@ export function StickyNavbar() {
   );
 
   return (
-    <Navbar className="sticky top-0 z-[100] h-max max-w-full rounded-none px-5 py-2 md:px-10 md:py-[9px] ">
+    <Navbar className="sticky top-0 z-[100] h-max max-w-full rounded-none px-5 py-2 md:px-10 md:py-[9px] min-w-[540px]">
       <div className="flex items-center justify-between text-blue-gray-900">
         <div className="flex items-center">
           <Typography
@@ -189,23 +191,43 @@ export function StickyNavbar() {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            <BuildingOffice2Icon onClick={() => {window.location.href = '/';}} width={28} />
+            <BuildingOffice2Icon
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              width={28}
+            />
           </Typography>
           <div className="mr-4 hidden lg:block">{navList}</div>
         </div>
         <div className="flex items-center">
           {isAuth ? (
-            <div className="flex">
-              <PlusCircleIcon width={24} className="mr-5" />
-              <BellIcon width={24} className="mr-5" />
+            <div className="flex gap-5 items-center">
+              <AddDorm />
+              <button>
+                <BellIcon width={24} />
+              </button>
+
               <ProfileMenu />
             </div>
           ) : (
             <div className="flex">
-              <Button onClick={() => {window.location.href = "/login";}} variant="outlined">
+              <Button
+                onClick={() => {
+                  window.location.href = "/login";
+                }}
+                variant="outlined"
+              >
                 Log in
               </Button>
-              <Button className="ml-5" onClick ={() => {window.location.href = "/register"}} >Register</Button>
+              <Button
+                className="ml-5"
+                onClick={() => {
+                  window.location.href = "/register";
+                }}
+              >
+                Register
+              </Button>
             </div>
           )}
           {isAuth ? (
