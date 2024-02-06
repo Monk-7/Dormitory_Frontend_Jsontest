@@ -29,7 +29,6 @@ import Report from "./Report";
 
 import apiClient from "../services/apiClient";
 import configAPI from "../services/configAPI.json";
-import { getUserId } from "../services/userService";
 
 import jsonData from "../jsonTest/Building.json";
 import AddBuilding from "./Popup/AddBuilding";
@@ -154,6 +153,7 @@ export default function Building({data}: dormitoryProps) {
   const [dormitoryData, setDormitoryData] = useState<dormitoryInfoInterface[]>([]);
   const [idDormitory,setIdDormitory] = useState<string>();
   const [roomName,setRoomName] = useState<string>('NO DATA');
+  const [idRoom,setIdRoom] = useState<string>('');
  
   const handleToggleAccordion = (index: number) => {
     setAccordionStates((prevStates) => {
@@ -214,10 +214,6 @@ export default function Building({data}: dormitoryProps) {
       console.error(error);
     }
   };
-
-  
-  
-  
   
   useEffect(() => {
     const getData = async () => {
@@ -284,7 +280,7 @@ export default function Building({data}: dormitoryProps) {
                           dataBuild.roomInfo &&
                           dataBuild.roomInfo.map((dataRoom) => (
                             
-                            <button onClick={() => {setRoomName(dataRoom.roomName);}}>
+                            <button onClick={() => {setRoomName(dataRoom.roomName); setIdRoom(dataRoom.idRoom);}}>
                               
                               {
                                 dataRoom.isRoomStay ? 
@@ -359,7 +355,7 @@ export default function Building({data}: dormitoryProps) {
               value={tabsData[0].value}
               className="!px-0 !pb-0"
             >
-             {/* {roomData && <TenantDetail room={roomData} user={userData} />} */}
+             <TenantDetail data ={idRoom}  />
             </TabPanel>
             <TabPanel
               key={tabsData[1].value}
