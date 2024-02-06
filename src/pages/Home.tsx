@@ -6,9 +6,48 @@ import {
   Cog6ToothIcon,
   BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
+
 import { Option, Select, Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import apiClient from "../services/apiClient";
+import { getUserId } from "../services/userService";
+import configAPI from "../services/configAPI.json";
+interface dormitoryInterface {
+  idDormitory: string;
+  idOwner: string;
+  dormitoryName: string;
+  address: string;
+  phoneNumber: string;
+  email: string;
+  timesTamp: Date;
+}
 
 export default function Home() {
+
+  const [dormData, setDormData] = useState<dormitoryInterface[]>();
+
+  useEffect( () => {
+    const getDataDorm = async () => {
+      const id = getUserId();
+      if(id !== '')
+      {
+        try {
+          const res = await apiClient(`${configAPI.api_url.localHost}/Dormitory/GetAllDormitory/${id}`, {
+            method: 'GET',
+          });
+          setDormData(res.data);
+          console.log(res);
+        }
+        catch (error)
+        {
+          console.log(error);
+        }
+      }
+    }
+
+    getDataDorm();
+  }, []);
+
   return (
     <div className="mx-5 md:mx-10 mt-5 mb-10 min-w-[500px]">
       {/* <Imgslide /> */}
@@ -27,7 +66,7 @@ export default function Home() {
           </Select>
         </div>
       </div>
-      <Building />
+      {dormData && <Building data={dormData} />}
     </div>
   );
 }
