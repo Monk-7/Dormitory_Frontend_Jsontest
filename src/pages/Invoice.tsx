@@ -1,5 +1,5 @@
 import AddBuilding from "../components/Popup/AddBuilding";
-import Building from "../components/Building";
+import Building from "./Management";
 import { CalendarDaysIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import {
   Button,

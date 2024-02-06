@@ -175,7 +175,7 @@ export default function Community() {
   return (
     <div className="mx-5 mt-5 mb-10 min-w-[500px]">
       <Typography variant="h5">Community</Typography>
-      <div className="flex md:justify-between justify-center">
+      <div className="flex md:justify-between justify-center mt-5">
         <Card className="h-fit min-w-[250px] w-[30%] lg:w-[20%] hidden md:block">
           <List className="text-sm">
             <ListItem

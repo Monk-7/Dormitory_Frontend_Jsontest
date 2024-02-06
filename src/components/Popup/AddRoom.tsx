@@ -27,7 +27,7 @@ interface buildingInterface {
   parkingPrice: number;
 }
 
-export default function AddBuilding() {
+export default function AddRoom() {
   const { status: isOpen, toggleStatus: setIsOpen } = useToggle();
 
   const [form, setForm] = useState<buildingInterface>({
@@ -90,70 +90,15 @@ export default function AddBuilding() {
         className="cursor-pointer"
       />
       <Dialog size="sm" open={isOpen} handler={setIsOpen} className="p-4 ">
-        <DialogHeader className="p-2">Create new building</DialogHeader>
+        <DialogHeader className="p-2">Create new room</DialogHeader>
         <DialogBody className="p-2">
-          <p>You need to enter the detail for create your dormitory.</p>
+          <p>You need to enter the detail for create your room.</p>
           <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Building name</p>
+            <p className="w-[200px] text-black text-right">Room name</p>
             <Input
               onChange={changeBuildingHandler}
-              name="buildingName"
-              label="Building name"
-            />
-          </div>
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Number of floors</p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="numberOfFloors"
-              label="Number of floors"
-            />
-          </div>
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">
-              Number of Rooms / Floor
-            </p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="roomsPerFloor"
-              label="Number of Rooms / Floor"
-            />
-          </div>
-        </DialogBody>
-        <DialogHeader className="p-2">Room details</DialogHeader>
-        <DialogBody className="p-2">
-          <p>Set room default for the fist time. You can be edited later.</p>
-
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Room Price</p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="roomPrice"
-              label="Room Price"
-            />
-          </div>
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Furniture Price</p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="furniturePrice"
-              label="Furniture Price"
-            />
-          </div>
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Electric Fee</p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="electricFee"
-              label="Electric Fee"
-            />
-          </div>
-          <div className="my-6 flex items-center gap-5">
-            <p className="w-[200px] text-black text-right">Water Fee</p>
-            <Input
-              onChange={changeBuildingHandler}
-              name="waterFee"
-              label="Water Fee"
+              name="roomName"
+              label="Room name"
             />
           </div>
         </DialogBody>

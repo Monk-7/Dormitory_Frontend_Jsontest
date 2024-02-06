@@ -1,5 +1,5 @@
 import AddBuilding from "../components/Popup/AddBuilding";
-import Building from "../components/Building";
+import Building from "./Management";
 import { FunnelIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import {
   Button,

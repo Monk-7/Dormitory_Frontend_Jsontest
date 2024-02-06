@@ -1,7 +1,24 @@
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { Button, Input, Typography } from "@material-tailwind/react";
+import {
+  PlusCircleIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/outline";
+
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  Input,
+  Typography,
+} from "@material-tailwind/react";
+import { useState } from "react";
+import DeletePopup from "./Popup/DeletePopup";
 
 export default function TenantDetail() {
+  const [openDelDialog, setOpenDelDialog] = useState(false);
+  const handleOpenDelDialog = () => setOpenDelDialog(!openDelDialog);
+
   return (
     <div className="text-sm">
       <Typography variant="h6">Tenant Details</Typography>
@@ -26,10 +43,6 @@ export default function TenantDetail() {
         <div className="col-span-3">
           <Input label="E-Mail" color="black" />
         </div>
-      </div>
-      <div className="flex items-center cursor-pointer text-sm">
-        <PlusCircleIcon width={26} className=" mr-2" />
-        Add another tenant
       </div>
       <Typography variant="h6" className="pt-4 pb-2">
         Room Details
@@ -62,15 +75,28 @@ export default function TenantDetail() {
         </div>
       </div>
       <div className="flex items-center cursor-pointer text-sm">
-        <PlusCircleIcon width={26} className=" mr-2" />
+        <PlusCircleIcon width={26} className="mr-2" />
         Add another
       </div>
-      <div className="flex mt-5 justify-end">
-        <Button className="mr-2 bg-gray-100 text-black shadow-none">
-          Gen code
+      <div className="flex mt-5 justify-between">
+        <Button
+          variant="outlined"
+          color="red"
+          className="focus:shadow-none"
+          onClick={handleOpenDelDialog}
+        >
+          Delete Room
         </Button>
-        <Button>Save</Button>
+        <DeletePopup open={openDelDialog} handleDialog={handleOpenDelDialog} />
+        <div className="flex gap-2">
+          <Button className=" bg-gray-100 text-black shadow-none hover:shadow-none">
+            Gen code
+          </Button>
+          <Button>Save</Button>
+        </div>
       </div>
+
+      <></>
     </div>
   );
 }

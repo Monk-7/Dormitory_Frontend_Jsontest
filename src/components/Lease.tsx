@@ -47,7 +47,7 @@ export default function Lease() {
           Upload
         </Button>
       </div>
-      <div className="flex w-full border rounded mt-5 p-5 h-80 items-center justify-center">
+      <div className="flex w-full border rounded mt-5 p-5 h-[60vh] lg:h-96 items-center justify-center">
         No Data
       </div>
       <div className="flex justify-end mt-5">
