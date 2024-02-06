@@ -28,14 +28,10 @@ import PaymentHistory from "./PaymentHistory";
 import Report from "./Report";
 
 import apiClient from "../services/apiClient";
-
 import configAPI from "../services/configAPI.json";
-
-import { getUserId } from "../services/userService";
 
 import jsonData from "../jsonTest/Building.json";
 import AddBuilding from "./Popup/AddBuilding";
-
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 
 const tabsData = [
@@ -88,8 +84,8 @@ function Icon({ id, open }: any) {
   );
 }
 
-
 function BuildingIcon({data}:{data:string}) {
+
   return (
     <div className="flex items-center gap-2">
       <AddBuilding idDormitory = {data} />
@@ -144,7 +140,7 @@ interface dormitoryInterface {
   phoneNumber: string;
   email: string;
   timesTamp: Date;
-
+  
 }
 
 interface dormitoryProps  {
@@ -157,6 +153,7 @@ export default function Building({data}: dormitoryProps) {
   const [dormitoryData, setDormitoryData] = useState<dormitoryInfoInterface[]>([]);
   const [idDormitory,setIdDormitory] = useState<string>();
   const [roomName,setRoomName] = useState<string>('NO DATA');
+  const [idRoom,setIdRoom] = useState<string>('');
  
   const handleToggleAccordion = (index: number) => {
     setAccordionStates((prevStates) => {
@@ -217,10 +214,6 @@ export default function Building({data}: dormitoryProps) {
       console.error(error);
     }
   };
-
-  
-  
-  
   
   useEffect(() => {
     const getData = async () => {
@@ -243,13 +236,15 @@ export default function Building({data}: dormitoryProps) {
 
   const check = () =>
   {
-    console.log(dormitoryData[0].buildingInfo[0]);
+    console.log(dormitoryData);
   }
-      
+
   const handleOpen = (value: any) => setOpen(open === value ? 0 : value);
 
   return (
     <div className="flex justify-between">
+      <button onClick={check}>check</button>
+
       <div className="w-full lg:w-[70%]">
       {dormitoryData && dormitoryData.map((dataDorm,index) => (
         <Card className="px-5 py-1 mb-5 lg:mr-5 h-fit overflow-auto min-w-[500px]">
@@ -285,7 +280,7 @@ export default function Building({data}: dormitoryProps) {
                           dataBuild.roomInfo &&
                           dataBuild.roomInfo.map((dataRoom) => (
                             
-                            <button onClick={() => {setRoomName(dataRoom.roomName);}}>
+                            <button onClick={() => {setRoomName(dataRoom.roomName); setIdRoom(dataRoom.idRoom);}}>
                               
                               {
                                 dataRoom.isRoomStay ? 
@@ -360,7 +355,7 @@ export default function Building({data}: dormitoryProps) {
               value={tabsData[0].value}
               className="!px-0 !pb-0"
             >
-             {/* {roomData && <TenantDetail room={roomData} user={userData} />} */}
+             <TenantDetail data ={idRoom}  />
             </TabPanel>
             <TabPanel
               key={tabsData[1].value}
@@ -386,6 +381,7 @@ export default function Building({data}: dormitoryProps) {
           </TabsBody>
         </Tabs>
       </Card>
+
     </div>
   );
 }
