@@ -5,6 +5,9 @@ import {
   Button,
   Input,
   Option,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
   Select,
   Tab,
   Tabs,
@@ -17,6 +20,7 @@ import apiClient from "../services/apiClient";
 import { getUserId } from "../services/userService";
 
 import jsonData from "../jsonTest/Meter.json";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 
 interface meterPrevInterface {
   idMeter: string;
@@ -155,7 +159,26 @@ export default function Meter() {
     <div className="mx-5 md:mx-10 mt-5 mb-10 min-w-[500px]">
       <div className="flex justify-between items-center">
         <Typography variant="h5">Meter</Typography>
-        <div className="flex w-70 gap-2">
+        <div className="block md:hidden">
+          <Popover placement="bottom-end">
+            <PopoverHandler>
+              <AdjustmentsHorizontalIcon className="w-6 cursor-pointer" />
+            </PopoverHandler>
+            <PopoverContent className="flex flex-col gap-2">
+              <Select label="Select Domitory">
+                <Option>Domitory A</Option>
+                <Option>Domitory B</Option>
+                <Option>Domitory C</Option>
+              </Select>
+              <Select label="Select Building" disabled>
+                <Option>Building A</Option>
+                <Option>Building B</Option>
+                <Option>Building C</Option>
+              </Select>
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="hidden md:flex gap-2">
           <Select label="Select Domitory">
             <Option>Domitory A</Option>
             <Option>Domitory B</Option>

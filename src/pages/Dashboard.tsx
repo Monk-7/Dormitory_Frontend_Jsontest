@@ -63,7 +63,7 @@ interface ChartCardProps {
 
 const ChartCard: React.FC<ChartCardProps> = ({ title, description }) => {
   return (
-    <Card className="w-80">
+    <Card>
       <CardHeader
         floated={false}
         shadow={false}
@@ -95,7 +95,11 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, description }) => {
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="mx-5 md:mx-10 mt-5 mb-10 min-w-[500px]">
+      <Typography variant="h5">Dashboard</Typography>
+      <Card>Test</Card>
+      <Card>Test</Card>
+      <Card>Test</Card>
       <ChartCard
         title="Bar Chart"
         description="Visualize your data in a simple way using the @material-tailwind/react chart plugin."
